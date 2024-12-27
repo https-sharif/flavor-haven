@@ -36,7 +36,6 @@ export function OrderList() {
             throw new Error("Failed to fetch orders");
           }
           const data = await response.json();
-          console.log("Orders fetched successfully", data.orders);
           sortOrder(data.orders);
           setOrders(data.orders);
         } catch (error) {

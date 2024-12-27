@@ -15,7 +15,7 @@ export function Badge({ className, variant = 'pending', ...props }: BadgeProps) 
           'bg-green-100 text-green-800': variant === 'ready',
           'bg-gray-100 text-gray-800': variant === 'delivered',
           'bg-red-100 text-red-800': variant === 'cancelled',
-          'bg-purple-100 text-purple-800': variant === 'confirmed',
+          'bg-green-100 text-green-900': variant === 'confirmed',
         },
         className
       )}

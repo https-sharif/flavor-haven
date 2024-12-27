@@ -38,7 +38,6 @@ router.post("/create-user", async (req, res) => {
             role: "customer",
         });
 
-        console.log(newUser);
         await newUser.save();
 
         res.status(201).json({

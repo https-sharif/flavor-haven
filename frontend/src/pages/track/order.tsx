@@ -1,9 +1,13 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Search, Clock } from 'lucide-react';
-import { Button } from '../../components/ui/button';
-import { Input } from '../../components/ui/input';
-import { Card } from '../../components/ui/card';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Search, Clock } from "lucide-react";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Card } from "../../components/ui/card";
+import { displayMessage } from "../../lib/displayMessage";
+import timeAgo from "../../lib/timeAgo";
+import getWidth from "../../lib/getWidth";
+
 
 // 5 - pending
 // 25 - preparing
@@ -12,110 +16,123 @@ import { Card } from '../../components/ui/card';
 // 0 - cancelled
 
 export function TrackOrderPage() {
-  const [orderId, setOrderId] = useState('');
-  const [orderStatus, setOrderStatus] = useState<null | {
-    status: 'pending' | 'preparing' | 'ready' | 'delivered' | 'cancelled';
-    items: Array<{ name: string; quantity: number }>;
-    estimatedTime: string;
-    createdAt?: Date;
-  }>(null);
+    const [orderId, setOrderId] = useState("");
+    const [orderStatus, setOrderStatus] = useState<null | {
+        status: "pending" | "preparing" | "ready" | "delivered" | "cancelled";
+        items: Array<{ name: string; quantity: number }>;
+        estimatedDeliveryTime: number;
+        createdAt: Date;
+    }>(null);
 
-  const handleTrack = async (e: React.FormEvent) => {
-    e.preventDefault();
+    const handleTrack = async (e: React.FormEvent) => {
+        e.preventDefault();
 
+        const response = await fetch(
+            `http://localhost:3000/api/track/order/${orderId}`,
+            {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            }
+        );
 
-    // Simulate fetching order status
-    // const response = await fetch('http://localhost:3000/api/order');
-    
-    setOrderStatus({
-      status: 'delivered',
-      items: [
-        { name: 'Wagyu Ribeye', quantity: 1 },
-        { name: 'Truffle Fries', quantity: 2 }
-      ],
-      estimatedTime: '25 minutes'
-    });
-  };
+        if (!response.ok) {
+            console.error("Failed to fetch order status");
+            displayMessage ("Failed to fetch order status");
+            return;
+        }
 
-  return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      <div className="container mx-auto px-4 py-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto"
-        >
-          <h1 className="text-4xl font-bold text-center mb-8">
-            Track Your <span className="text-primary">Order</span>
-          </h1>
+        const data = await response.json();
 
-          <Card className="p-6 mb-8">
-            <form onSubmit={handleTrack} className="space-y-4">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <Input
-                  type="text"
-                  placeholder="Enter your order ID"
-                  className="pl-10"
-                  value={orderId}
-                  onChange={(e) => setOrderId(e.target.value)}
-                />
-              </div>
-              <Button type="submit" className="w-full">
-                Track Order
-              </Button>
-            </form>
-          </Card>
+        setOrderStatus(data.order);
+    };
 
-          {orderStatus && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              <Card className="p-6">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold">Order Status</h2>
-                    <span className="px-4 py-1 bg-primary/10 text-primary rounded-full">
-                      {orderStatus.status}
-                    </span>
-                  </div>
+    return (
+        <div className="min-h-screen bg-gray-50 pt-20">
+            <div className="container mx-auto px-4 py-12">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="max-w-2xl mx-auto"
+                >
+                    <h1 className="text-4xl font-bold text-center mb-8">
+                        Track Your <span className="text-primary">Order</span>
+                    </h1>
 
-                  <div className="space-y-2">
-                    <h3 className="font-medium">Items:</h3>
-                    {orderStatus.items.map((item, index) => (
-                      <div key={index} className="flex justify-between">
-                        <span>{item.name}</span>
-                        <span>x{item.quantity}</span>
-                      </div>
-                    ))}
-                  </div>
+                    <Card className="p-6 mb-8">
+                        <form onSubmit={handleTrack} className="space-y-4">
+                            <div className="relative">
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                                <Input
+                                    type="text"
+                                    placeholder="Enter your order ID"
+                                    className="pl-10"
+                                    value={orderId}
+                                    onChange={(e) => setOrderId(e.target.value)}
+                                />
+                            </div>
+                            <Button type="submit" className="w-full">
+                                Track Order
+                            </Button>
+                        </form>
+                    </Card>
 
-                  <div className="flex items-center gap-2 text-primary">
-                    <Clock className="w-5 h-5" />
-                    <span>Estimated time: {orderStatus.estimatedTime}</span>
-                  </div>
+                    {orderStatus && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                        >
+                            <Card className="p-6">
+                                <div className="space-y-6">
+                                    <div className="flex items-center justify-between">
+                                        <h2 className="text-xl font-semibold">
+                                            Order Status
+                                        </h2>
+                                        <span className="px-4 py-1 bg-primary/10 text-primary rounded-full">
+                                            {orderStatus.status}
+                                        </span>
+                                    </div>
 
-                  <div className="relative pt-6">
-                    <div className="absolute left-0 top-0 w-full h-1 bg-gray-200 rounded">
-                      <div 
-                        className="absolute left-0 top-0 h-full bg-primary rounded"
-                        style={{ 
-                          width: 
-                            orderStatus.status === 'pending' ? '25%' :
-                            orderStatus.status === 'preparing' ? '50%' :
-                            orderStatus.status === 'ready' ? '75%' :
-                            '100%'
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </motion.div>
-          )}
-        </motion.div>
-      </div>
-    </div>
-  );
+                                    <div className="space-y-2">
+                                        <h3 className="font-medium">Items:</h3>
+                                        {orderStatus.items.map(
+                                            (item, index) => (
+                                                <div
+                                                    key={index}
+                                                    className="flex justify-between"
+                                                >
+                                                    <span>{item.name}</span>
+                                                    <span>
+                                                        x{item.quantity}
+                                                    </span>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+
+                                    <div className="flex items-center gap-2 text-primary">
+                                        <Clock className="w-5 h-5" />
+                                        <span>
+                                            Estimated time:{" "}
+                                            {timeAgo(orderStatus.createdAt, orderStatus.estimatedDeliveryTime)} minutes
+                                        </span>
+                                    </div>
+
+                                    <div className="relative pt-6">
+                                        <div className="absolute left-0 top-0 w-full h-1 bg-gray-200 rounded">
+                                            <div
+                                                className="absolute left-0 top-0 h-full bg-primary rounded"
+                                                style={{
+                                                    width: `${getWidth(orderStatus.createdAt, orderStatus.estimatedDeliveryTime)}%`
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </Card>
+                        </motion.div>
+                    )}
+                </motion.div>
+            </div>
+        </div>
+    );
 }

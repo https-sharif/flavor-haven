@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
 import { Button } from "../../components/ui/button";
 import { StatsCards } from "./components/stats-cards";
 import { OrderTable } from "./components/order-table";
@@ -49,7 +48,6 @@ export function AdminDashboard() {
                     throw new Error("Failed to fetch orders");
                 }
                 const data = await response.json();
-                console.log("Orders fetched successfully", data.orders);
 
                 data.orders.forEach((order: FetchedOrders) => {
                     setRevenue((prev) => prev + order.total);

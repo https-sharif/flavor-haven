@@ -20,7 +20,6 @@ export function CartPage() {
     >("cart");
     const { items, updateQuantity, removeItem, clearCart } = useCartStore();
     const { user } = useAuthStore();
-    const [eta, setEta] = useState(0);
     const [orderId, setOrderId] = useState("");
 
     const handleDeliverySubmit = () => {
@@ -28,20 +27,22 @@ export function CartPage() {
     };
 
     const calculateEstimatedDeliveryTime = () => {
+        let deliveryTime = 0;
         items.forEach((item) => {
             const menuItem = menuItems.find(
                 (menuItem) => menuItem.id === item.id
             );
-            if (menuItem && menuItem.eta > eta) {
-                setEta(menuItem.eta);
+            if (menuItem && menuItem.eta > deliveryTime) {
+                deliveryTime = menuItem.eta;
             }
         });
+        return deliveryTime;
     };
+
+    const deliveryTime = calculateEstimatedDeliveryTime();
 
     const handlePaymentSubmit = async () => {
         try {
-            const eta = calculateEstimatedDeliveryTime();
-
             const response = await fetch(
                 "http://localhost:3000/api/order/create-order",
                 {
@@ -51,13 +52,10 @@ export function CartPage() {
                         userId: user?.userId,
                         name: user?.name,
                         items,
-                        total: items.reduce(
-                            (total, item) => total + item.price * item.quantity,
-                            0
-                        ),
+                        total: items.reduce((total, item) => total + item.price * item.quantity, 0),
                         status: "pending",
                         createdAt: new Date(),
-                        estimatedDeliveryTime: eta,
+                        estimatedDeliveryTime: deliveryTime,
                     }),
                 }
             );
@@ -66,7 +64,6 @@ export function CartPage() {
                 throw new Error("Failed to create order");
             } else {
                 const data = await response.json();
-                console.log("Order created successfully", data);
                 setOrderId(data.order.id);
             }
 
@@ -99,7 +96,7 @@ export function CartPage() {
                     </h1>
 
                     {step !== "success" && (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             <motion.div
                                 className="lg:col-span-2"
                                 initial={{ opacity: 0, y: 20 }}
@@ -145,7 +142,7 @@ export function CartPage() {
                     )}
                 </div>
                 {step === "success" && (
-                    <OrderSuccess orderId={orderId} estimatedTime={eta} />
+                    <OrderSuccess orderId={orderId} estimatedTime={deliveryTime} />
                 )}
             </div>
         </div>

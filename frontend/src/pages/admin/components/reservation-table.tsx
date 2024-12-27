@@ -13,7 +13,7 @@ export function ReservationTable({ reservations, onStatusChange }: ReservationTa
     <Table>
       <thead>
         <tr>
-          <th>ID</th>
+          <th>Reservation ID</th>
           <th>Customer</th>
           <th>Date</th>
           <th>Time</th>

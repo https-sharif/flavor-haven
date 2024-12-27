@@ -20,7 +20,6 @@ router.post("/create-order", async (req, res) => {
 
         await newOrder.save();
 
-        console.log("Order created:", newOrder);
         res.status(201).json({
             message: "Order created successfully",
             order: newOrder,

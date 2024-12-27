@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { Table } from "../../../components/ui/table";
 import { Badge } from "../../../components/ui/badge";
 import type { FetchedOrders } from "../../../types";
 import { Trash2 } from "lucide-react";
+import { displayMessage } from "../../../lib/displayMessage";
 
 interface OrderTableProps {
     orders: FetchedOrders[];
@@ -9,6 +11,38 @@ interface OrderTableProps {
 }
 
 export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
+
+    const [orderList, setOrderList] = useState([] as FetchedOrders[]);
+
+    const deleteOrder = async (orderId: string) => {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this orders?"
+        );
+        if (confirmed) {
+            try {
+                const response = await fetch(
+                    `http://localhost:3000/api/order/delete-order/${orderId}`,
+                    {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+                if (!response.ok) {
+                    throw new Error("Failed to delete order");
+                }
+                displayMessage("Order deleted successfully");
+                setOrderList(orderList.filter((order) => order.id !== orderId));
+            } catch (error) {
+                console.error("Error deleting order:", error);
+                displayMessage("Failed to delete order");
+            }
+        }
+    }
+
+    useEffect(() => {
+        setOrderList(orders);
+    }, [orders]);
+
     return (
         <Table className="w-full">
             <thead>
@@ -24,7 +58,7 @@ export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
                 </tr>
             </thead>
             <tbody>
-                {orders.map((order) => (
+                {orderList.map((order) => (
                     <tr key={order.id}>
                         <td className="font-mono border border-gray-700 text-center">
                             {order.id}
@@ -68,14 +102,8 @@ export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
                         </td>
                         <td className="font-mono border border-gray-700 text-center">
                             <Trash2
-                                // implement backend delete order
                                 onClick={() => {
-                                    const confirmed = window.confirm(
-                                        "Are you sure you want to delete this orders?"
-                                    );
-                                    if (confirmed) {
-                                        // deleteOrder(order.id);
-                                    }
+                                    deleteOrder(order.id);
                                 }}
                                 className="text-2xl"
                             />
