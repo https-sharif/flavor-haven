@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  box-sizing: border-box;
+  background-color: rgb(0 0 0 / 0.95);
+}
