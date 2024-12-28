@@ -8,7 +8,6 @@ const router = express.Router();
 // Fetch order by orderId
 router.get("/order/:orderId", async (req, res) => {
   const { orderId } = req.params;
-    console.log("orderId", orderId);
   try {
     const order = await Order.findOne({ id: orderId });
     if (!order) {
