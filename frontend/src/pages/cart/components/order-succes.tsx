@@ -49,7 +49,7 @@ export function OrderSuccess({ orderId, estimatedTime }: OrderSuccessProps) {
       </div>
 
       <div className="space-y-3 ">
-        <Link to={'/track-order'}>
+        <Link to={`/track-order/${orderId}`}>
           <Button className="w-4/5">Track Order</Button>
         </Link>
         <Link to="/menu">

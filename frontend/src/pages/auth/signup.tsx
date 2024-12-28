@@ -72,7 +72,6 @@ export function SignupPage() {
                 formData.password,
             );
             const user = userCredential.user;
-            console.log(user.uid);
 
             const response = await fetch(
                 "http://localhost:3000/api/user/create-user",

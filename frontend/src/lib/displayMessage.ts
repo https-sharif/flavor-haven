@@ -18,9 +18,9 @@ export function displayMessage(message: string): void {
     });
 
     setTimeout(() => {
-        dialog.style.opacity = "0";
         dialog.addEventListener("transitionend", () => {
             document.body.removeChild(dialog);
         });
+        dialog.style.opacity = "0";
     }, 3000);
 }

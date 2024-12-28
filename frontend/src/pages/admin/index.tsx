@@ -6,7 +6,6 @@ import { OrderTable } from "./components/order-table";
 import { ReservationTable } from "./components/reservation-table";
 import type { FetchedOrders, Reservation } from "../../types";
 import { UnauthorizedPage } from "../errors/UnauthorizedPage";
-
 import { useAuthStore } from "../../store/auth-store";
 import LoginRequiredPage from "../errors/LoginRequiredPage";
 import { displayMessage } from "../../lib/displayMessage";
@@ -52,6 +51,8 @@ export function AdminDashboard() {
                 data.orders.forEach((order: FetchedOrders) => {
                     setRevenue((prev) => prev + order.total);
                 });
+
+                data.orders.sort((a: { createdAt: Date; }, b: { createdAt: Date; }) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
                 setOrders(data.orders);
             } catch (error) {

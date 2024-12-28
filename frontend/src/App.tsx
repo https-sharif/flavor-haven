@@ -30,23 +30,14 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />} />
                         <Route path="/menu" element={<MenuPage />} />
-                        <Route
-                            path="/reservations"
-                            element={<ReservationsPage />}
-                        />
+                        <Route path="/reservations" element={<ReservationsPage />} />
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignupPage />} />
                         <Route path="/orders" element={<OrderList />} />
                         <Route path="/terms" element={<TermsPage />} />
                         <Route path="/policy" element={<PolicyPage />} />
-                        <Route
-                            path="/track-order"
-                            element={<TrackOrderPage />}
-                        />
-                        <Route
-                            path="/track-reservation"
-                            element={<TrackReservationPage />}
-                        />
+                        <Route path="/track-order/:orderId?" element={<TrackOrderPage />} />
+                        <Route path="/track-reservation/:reservationId?" element={<TrackReservationPage />} />
                         <Route path="/admin" element={<AdminDashboard />} />
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/cart" element={<CartPage />} />

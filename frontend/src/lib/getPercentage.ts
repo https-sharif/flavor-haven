@@ -1,4 +1,4 @@
-function getWidth(date: Date, num: number): number {
+function getPercentage(date: Date, num: number): number {
     const now = new Date();
     const validDate = new Date(date);
     const diffInMinutes = (now.getTime() - validDate.getTime()) / (1000 * 60);
@@ -6,4 +6,4 @@ function getWidth(date: Date, num: number): number {
     return Math.min(percent, 100);
 }
 
-export default getWidth;
+export default getPercentage;
