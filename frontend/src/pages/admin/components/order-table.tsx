@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Table } from "../../../components/ui/table";
 import { Badge } from "../../../components/ui/badge";
 import type { FetchedOrders } from "../../../types";
-import { Trash2 } from "lucide-react";
 import { displayMessage } from "../../../lib/displayMessage";
+import { Trash2 } from "lucide-react";
 
 interface OrderTableProps {
     orders: FetchedOrders[];
@@ -13,6 +13,10 @@ interface OrderTableProps {
 export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
 
     const [orderList, setOrderList] = useState([] as FetchedOrders[]);
+
+    useEffect(() => {
+        setOrderList(orders);
+    }, [orders]);
 
     const deleteOrder = async (orderId: string) => {
         const confirmed = window.confirm(
@@ -38,10 +42,6 @@ export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
             }
         }
     }
-
-    useEffect(() => {
-        setOrderList(orders);
-    }, [orders]);
 
     return (
         <Table className="w-full">

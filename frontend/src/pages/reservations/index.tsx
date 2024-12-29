@@ -4,30 +4,55 @@ import { Card } from '../../components/ui/card';
 import { ReservationForm, type ReservationFormData } from './components/reservation-form';
 import { ReservationSuccess } from './components/reservation-success';
 import { displayMessage } from '../../lib/displayMessage';
+import { useAuthStore } from '../../store/auth-store';
+import LoginRequiredPage from '../errors/LoginRequiredPage';
 
 
 export function ReservationsPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [reservation, setReservation] = useState<{
     id: string;
-    date: Date;
+    date: string;
     time: string;
     guests: number;
   } | null>(null);
   const [randomTable, setRandomTable] = useState<number>(0);
+  const { user, isAuthenticated } = useAuthStore();
 
   const handleSubmit = async (data: ReservationFormData) => {
     setIsLoading(true);
     try {
-      // TODO: Implement actual reservation API call
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      console.log(data);
+      console.log(user);
       
-      setReservation({
-        id: Math.random().toString(36).substr(2, 9),
-        date: new Date(data.date),
-        time: data.time,
-        guests: data.guests,
+      const response = await fetch('http://localhost:3000/api/reservation/create-reservation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: user?.userId,
+          date: data.date,
+          time: data.time,
+          name: data.name,
+          guests: data.guests,
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error('Failed to create reservation');
+      }
+      else {
+        const data = await response.json();
+        console.log(data);
+        setReservation({
+          id: data.reservation.id,
+          date: data.reservation.date,
+          time: data.reservation.time,
+          guests: data.reservation.guests,
+        });
+      }
+
     } catch (error) {
       console.error('Failed to create reservation:', error);
       displayMessage('Failed to create reservation. Please try again.');
@@ -39,6 +64,10 @@ export function ReservationsPage() {
   useEffect(() => {
     setRandomTable(Math.floor(Math.random() * 34) + 1);
   }, []);
+
+  if (!isAuthenticated) {
+    return <LoginRequiredPage />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20">
@@ -70,7 +99,7 @@ export function ReservationsPage() {
               </p>
             </>
           ) : (
-            <ReservationSuccess reservationId={"3452342s"} randomTable={randomTable} {...reservation} />
+            <ReservationSuccess reservationId={reservation.id} randomTable={randomTable} {...reservation} />
           )}
         </motion.div>
       </div>

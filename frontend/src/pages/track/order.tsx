@@ -10,10 +10,6 @@ import timeAgo from "../../lib/timeAgo";
 import getPercentage from "../../lib/getPercentage";
 import { Badge } from "../../components/ui/badge";
 
-// 20 - preparing
-// 75 - ready
-// 100 - delivered
-
 export function TrackOrderPage() {
     const { orderId: paramOrderId } = useParams<{ orderId: string }>();
     const [orderId, setOrderId] = useState(paramOrderId || "");

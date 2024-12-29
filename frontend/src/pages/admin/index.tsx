@@ -10,20 +10,9 @@ import { useAuthStore } from "../../store/auth-store";
 import LoginRequiredPage from "../errors/LoginRequiredPage";
 import { displayMessage } from "../../lib/displayMessage";
 
-const mockReservations: Reservation[] = [
-    {
-        id: "1",
-        userId: "user123",
-        date: new Date(),
-        time: "19:00",
-        guests: 4,
-        status: "pending",
-    },
-];
-
 export function AdminDashboard() {
     const [orders, setOrders] = useState([] as FetchedOrders[]);
-    const [reservations, setReservations] = useState(mockReservations);
+    const [reservations, setReservations] = useState([] as Reservation[]);
     const [activeTab, setActiveTab] = useState<"orders" | "reservations">(
         "orders"
     );
@@ -60,6 +49,28 @@ export function AdminDashboard() {
             }
         }
 
+        async function fetchReservations() {
+            try {
+              const response = await fetch(
+                `http://localhost:3000/api/reservation/fetch-all-reservation`,
+                {
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
+                }
+              );
+              if (!response.ok) {
+                throw new Error("Failed to fetch reservations");
+              }
+              const data = await response.json();
+
+              data.reservations.sort((a: { date: string; }, b: { date: string; }) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+              setReservations(data.reservations);
+            } catch (error) {
+              console.error("Error fetching reservations:", error);
+            }
+          }
+
         async function fetchUserCount() {
             try {
                 const response = await fetch(
@@ -80,29 +91,9 @@ export function AdminDashboard() {
             }
         }
 
-        // async function fetchReservations() {
-        //   try {
-        //     const response = await fetch(
-        //       `http://localhost:3000/api/reservation`,
-        //       {
-        //         method: "GET",
-        //         headers: { "Content-Type": "application/json" },
-        //       }
-        //     );
-        //     if (!response.ok) {
-        //       throw new Error("Failed to fetch reservations");
-        //     }
-        //     const data = await response.json();
-        //     console.log("Reservations fetched successfully", data.reservations);
-        //     setReservations(data.reservations);
-        //   } catch (error) {
-        //     console.error("Error fetching reservations:", error);
-        //   }
-        // }
-
         fetchOrders();
+        fetchReservations();
         fetchUserCount();
-        // fetchReservations();
     }, [user]);
 
     const handleOrderStatusChange = async (
@@ -133,7 +124,7 @@ export function AdminDashboard() {
 
     };
 
-    const handleReservationStatusChange = (
+    const handleReservationStatusChange = async (
         reservationId: string,
         status: Reservation["status"]
     ) => {
@@ -144,6 +135,22 @@ export function AdminDashboard() {
                     : reservation
             )
         );
+
+        const response = await fetch(
+            `http://localhost:3000/api/reservation/update-reservation/${reservationId}`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status }),
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to update reservation");
+        }
+        else {
+          displayMessage("Reservation updated successfully");
+        }
     };
 
     if (!isAuthenticated) {

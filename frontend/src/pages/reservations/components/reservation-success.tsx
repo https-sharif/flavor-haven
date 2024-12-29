@@ -2,11 +2,10 @@ import { motion } from "framer-motion";
 import { CheckCircle, Calendar, Clock, Users } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Link } from "react-router-dom";
-import { formatDate } from "../../../lib/utils";
 
 interface ReservationSuccessProps {
     reservationId: string;
-    date: Date;
+    date: string;
     time: string;
     guests: number;
     randomTable: number;
@@ -73,7 +72,7 @@ export function ReservationSuccess({
                 <div className="flex items-center justify-center gap-4">
                     <div className="flex items-center gap-2">
                         <Calendar className="w-5 h-5 text-primary" />
-                        <span>{formatDate(date)}</span>
+                        <span>{date}</span>
                     </div>
                     <span className="text-primary">|</span>
                     <div className="flex items-center gap-2">

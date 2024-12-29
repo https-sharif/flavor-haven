@@ -23,7 +23,8 @@ export interface MenuItem {
 export interface Reservation {
   id: string;
   userId: string;
-  date: Date;
+  name: string;
+  date: string;
   time: string;
   guests: number;
   status: 'pending' | 'confirmed' | 'cancelled';
