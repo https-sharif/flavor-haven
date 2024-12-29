@@ -15,6 +15,7 @@ export function ReservationsPage() {
     date: string;
     time: string;
     guests: number;
+    table: number;
   } | null>(null);
   const [randomTable, setRandomTable] = useState<number>(0);
   const { user, isAuthenticated } = useAuthStore();
@@ -23,9 +24,6 @@ export function ReservationsPage() {
     setIsLoading(true);
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-
-      console.log(data);
-      console.log(user);
       
       const response = await fetch('http://localhost:3000/api/reservation/create-reservation', {
         method: 'POST',
@@ -36,6 +34,7 @@ export function ReservationsPage() {
           time: data.time,
           name: data.name,
           guests: data.guests,
+          table: randomTable,
         }),
       });
 
@@ -44,12 +43,13 @@ export function ReservationsPage() {
       }
       else {
         const data = await response.json();
-        console.log(data);
+        
         setReservation({
           id: data.reservation.id,
           date: data.reservation.date,
           time: data.reservation.time,
           guests: data.reservation.guests,
+          table: data.reservation.table,
         });
       }
 

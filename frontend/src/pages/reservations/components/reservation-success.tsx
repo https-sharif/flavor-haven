@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { CheckCircle, Calendar, Clock, Users } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { Link } from "react-router-dom";
+import findTable from "../../../lib/tablePlan";
 
 interface ReservationSuccessProps {
     reservationId: string;
@@ -10,13 +11,6 @@ interface ReservationSuccessProps {
     guests: number;
     randomTable: number;
 }
-
-const windowTable = [1, 4, 8, 12, 16, 20, 24];
-const boothTable = [2, 6, 10, 14, 18, 22, 26];
-const centerTable = [3, 7, 11, 15, 19, 23, 27];
-const cornerTable = [5, 9, 13, 17, 21, 25];
-const roofTopTable = [28, 29, 30, 31, 32, 33, 34];
-
 export function ReservationSuccess({
     reservationId,
     date,
@@ -24,17 +18,8 @@ export function ReservationSuccess({
     guests,
     randomTable,
 }: ReservationSuccessProps) {
-    const table = windowTable.includes(randomTable)
-        ? "Window Table"
-        : boothTable.includes(randomTable)
-        ? "Booth Table"
-        : centerTable.includes(randomTable)
-        ? "Center Table"
-        : cornerTable.includes(randomTable)
-        ? "Corner Table"
-        : roofTopTable.includes(randomTable)
-        ? "Roof Top Table"
-        : null;
+
+    const table = findTable(randomTable);
 
     return (
         <motion.div

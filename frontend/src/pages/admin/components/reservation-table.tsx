@@ -53,14 +53,14 @@ export function ReservationTable({
         <Table>
             <thead>
                 <tr>
-                    <th>Reservation ID</th>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Guests</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                    <th>Delete</th>
+                    <th className="border border-gray-700 p-2">Reservation ID</th>
+                    <th className="border border-gray-700 p-2">Customer</th>
+                    <th className="border border-gray-700 p-2">Date</th>
+                    <th className="border border-gray-700 p-2">Time</th>
+                    <th className="border border-gray-700 p-2">Guests</th>
+                    <th className="border border-gray-700 p-2">Status</th>
+                    <th className="border border-gray-700 p-2">Actions</th>
+                    <th className="border border-gray-700 p-2">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,7 +102,7 @@ export function ReservationTable({
                                 {reservation.status}
                             </Badge>
                         </td>
-                        <td className="font-mono border border-gray-700">
+                        <td className="font-mono border border-gray-700 place-items-center">
                             <Trash2
                                 className="cursor-pointer"
                                 onClick={() =>

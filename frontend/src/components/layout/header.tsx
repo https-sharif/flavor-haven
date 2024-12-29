@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { Menu, User, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { useAuthStore } from "../../store/auth-store";
+import { useCartStore } from "../../store/cart-store";
 
 export function Header() {
     const { isAuthenticated, user } = useAuthStore();
+    const totalItems = useCartStore((state) => state.totalItems);
 
     return (
         <header className="sticky top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm font-poppins">
@@ -47,7 +49,11 @@ export function Header() {
                     {isAuthenticated ? (
                         <>
                             <Link to="/cart">
+                            <div className="relative">
                                 <ShoppingCart className="w-6 h-6 text-[#D4AF37]" />
+                                <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-black text-xs font-semibold px-1 rounded-full">{totalItems} </span>
+                            </div>
+                                
                             </Link>
                             <Link
                                 to="/profile"

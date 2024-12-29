@@ -36,6 +36,10 @@ const reservationSchema = new Schema(
                 return this._id.toString();
             }
         },
+        table: {
+            type: Number,
+            required: true,
+        }
     },
     { timestamps: true }
 );

@@ -4,6 +4,7 @@ import type { CartItem } from '../types/cart';
 
 interface CartState {
   items: CartItem[];
+  totalItems: number;
   addItem: (item: CartItem) => void;
   updateQuantity: (id: string, quantity: number) => void;
   removeItem: (id: string) => void;
@@ -14,6 +15,7 @@ export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
       items: [],
+      totalItems: 0,
       addItem: (item) => set((state) => {
         const existingItem = state.items.find((i) => i.id === item.id);
         if (existingItem) {
@@ -23,21 +25,20 @@ export const useCartStore = create<CartState>()(
                 ? { ...i, quantity: i.quantity + 1 }
                 : i
             ),
+            totalItems: state.items.reduce((total, item) => total + item.quantity, 0),
           };
         }
-        return { items: [...state.items, { ...item, quantity: 1 }] };
+        return { items: [...state.items, { ...item, quantity: 1 }], totalItems: state.totalItems + 1 };
       }),
       updateQuantity: (id, quantity) => set((state) => ({
-        items: quantity > 0
-          ? state.items.map((item) =>
-              item.id === id ? { ...item, quantity } : item
-            )
-          : state.items.filter((item) => item.id !== id),
+        items: quantity > 0 ? state.items.map((item) => item.id === id ? { ...item, quantity } : item) : state.items.filter((item) => item.id !== id),
+        totalItems: state.items.reduce((total, item) => total + item.quantity, 0) + quantity,
       })),
       removeItem: (id) => set((state) => ({
         items: state.items.filter((item) => item.id !== id),
+        totalItems: state.items.reduce((total, item) => total + item.quantity, 0) - (state.items.find((item) => item.id === id)?.quantity ?? 0),
       })),
-      clearCart: () => set({ items: [] }),
+      clearCart: () => set({ items: [], totalItems: 0 }),
     }),
     {
       name: 'cart-storage',

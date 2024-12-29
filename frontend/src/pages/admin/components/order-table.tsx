@@ -100,7 +100,7 @@ export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
                         <td className="font-mono border border-gray-700 text-center">
                             <Badge variant={order.status}>{order.status}</Badge>
                         </td>
-                        <td className="font-mono border border-gray-700 text-center">
+                        <td className="font-mono border border-gray-700 place-items-center">
                             <Trash2
                                 onClick={() => {
                                     deleteOrder(order.id);

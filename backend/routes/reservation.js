@@ -4,7 +4,7 @@ import Reservation from '../models/Reservation.js';
 const router = express.Router();
 
 router.post('/create-reservation', async (req, res) => {
-    const { userId, date, time, guests, name, status } = req.body;
+    const { userId, date, time, guests, name, table, status } = req.body;
 
     try {
         const newReservation = new Reservation({
@@ -13,6 +13,7 @@ router.post('/create-reservation', async (req, res) => {
             time,
             guests,
             name,
+            table,
             status: status || 'pending',
         });
 
