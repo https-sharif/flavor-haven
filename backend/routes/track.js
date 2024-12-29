@@ -1,11 +1,9 @@
 import express from "express";
 import Order from "../models/Order.js";
-import mongoose from "mongoose";
-// import Reservation from "../models/Reservation.js";
+import Reservation from "../models/Reservation.js";
 
 const router = express.Router();
 
-// Fetch order by orderId
 router.get("/order/:orderId", async (req, res) => {
   const { orderId } = req.params;
   try {
@@ -24,7 +22,7 @@ router.get("/reservation/:reservationId", async (req, res) => {
     const { reservationId } = req.params;
   
     try {
-      const reservation = await Reservation.findOne({ reservationId });
+      const reservation = await Reservation.findOne({ id: reservationId });
       if (!reservation) {
         return res.status(404).json({ message: "Reservation not found" });
       }

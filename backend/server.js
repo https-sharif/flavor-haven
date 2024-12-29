@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/user.js';
 import orderRoutes from './routes/order.js';
 import trackRoutes from './routes/track.js';
+import reservationRoutes from './routes/reservation.js';
 import cors from 'cors';
 
 dotenv.config();
@@ -36,6 +37,7 @@ app.use(cors({
 app.use('/api/user', userRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/track', trackRoutes);
+app.use('/api/reservation', reservationRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 3000;

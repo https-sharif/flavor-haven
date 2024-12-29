@@ -46,7 +46,7 @@ router.delete('/delete-reservation/:reservationId', async (req, res) => {
     const { reservationId } = req.params;
 
     try {
-        const result = await Reservation.findByIdAndDelete({ reservationId });
+        const result = await Reservation.findByIdAndDelete(reservationId);
 
         if (!result) {
             return res.status(404).json({ message: 'Reservation not found' });
@@ -67,7 +67,7 @@ router.put('/update-reservation/:reservationId', async (req, res) => {
     const { status } = req.body;
 
     try {
-        const reservation = await Reservation.findById({ reservationId });
+        const reservation = await Reservation.findById(reservationId);
 
         if (!reservation) {
             return res.status(404).json({ message: 'Reservation not found' });

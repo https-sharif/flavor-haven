@@ -29,6 +29,13 @@ const reservationSchema = new Schema(
             enum: ["pending", "confirmed", "cancelled"],
             default: "pending",
         },
+        id: {
+            type: String,
+            unique: true,
+            default: function () {
+                return this._id.toString();
+            }
+        },
     },
     { timestamps: true }
 );
