@@ -26,8 +26,16 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors({
-  origin: ['https://flavor-haven.vercel.app/','https://flavor-haven-git-master-sharif-islams-projects.vercel.app/'],
+  origin: [
+    'https://flavor-haven.vercel.app/',
+    'https://flavor-haven-git-master-sharif-islams-projects.vercel.app/'
+  ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
+
+
 app.use('/api/user', userRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/track', trackRoutes);
