@@ -32,7 +32,6 @@ app.use(cors({
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
 }));
 
 
@@ -42,4 +41,5 @@ app.use('/api/track', trackRoutes);
 app.use('/api/reservation', reservationRoutes);
 app.use('/api/contact', contactRoutes);
 
+const PORT = process.env.PORT || 5000;
 app.listen(PORT);
