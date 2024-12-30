@@ -40,8 +40,6 @@ setPersistence(auth, browserLocalPersistence);
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        console.log(import.meta.env.VITE_BACKEND_URL);
-
         const userExists = await fetch(
             `${import.meta.env.VITE_BACKEND_URL}/api/user/get-user/${user.uid}`,
             {

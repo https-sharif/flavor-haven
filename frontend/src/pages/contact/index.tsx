@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ContactForm } from "./components/contact-form";
 import { ContactInfo } from "./components/contact-info";
 import { Card } from "../../components/ui/card";
+import { displayMessage } from "../../lib/displayMessage";
 
 export function ContactPage() {
     interface ContactFormData {
@@ -22,11 +23,10 @@ export function ContactPage() {
             });
 
             if (!response.ok) {
-            throw new Error("Network response was not ok");
+                throw new Error("Network response was not ok");
             }
 
-            const result = await response.json();
-            console.log("Form submitted successfully:", result);
+            displayMessage("Your message has been sent successfully!");
         } catch (error) {
             console.error("There was a problem with the form submission:", error);
         }
