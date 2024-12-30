@@ -125,7 +125,7 @@ export function SignupPage() {
                         break;
                 }
             } else {
-                console.error("Unexpected error:", error);
+                setError("An unknown error occurred. Please try again later.");
             }
         }
         setIsLoading(false);
@@ -192,7 +192,7 @@ export function SignupPage() {
             
                         navigate("/");
         } catch (error) {
-            console.error("Error during sign-in:", error);
+            (error as Error).message = "Error during sign-in";
         } finally {
             setIsLoading(false);
         }
@@ -260,7 +260,7 @@ export function SignupPage() {
             
                         navigate("/");
         } catch (error) {
-            console.error("Error during sign-in:", error);
+            (error as Error).message = "Error during sign-in";
         }
         setIsLoading(false);
     };

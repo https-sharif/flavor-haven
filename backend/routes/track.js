@@ -13,7 +13,6 @@ router.get("/order/:orderId", async (req, res) => {
     }
     res.status(200).json({ message: "Order found", order });
   } catch (error) {
-    console.error("Error fetching order:", error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -28,7 +27,6 @@ router.get("/reservation/:reservationId", async (req, res) => {
       }
       res.status(200).json({ message: "Reservation found", reservation });
     } catch (error) {
-      console.error("Error fetching reservation:", error);
       res.status(500).json({ message: error.message });
     }
   });

@@ -19,7 +19,6 @@ router.get("/get-user/:userId", async (req, res) => {
             user,
         });
     } catch (error) {
-        console.error("Error fetching user:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -45,7 +44,6 @@ router.post("/create-user", async (req, res) => {
             user: newUser,
         });
     } catch (error) {
-        console.error("Error checking or creating user:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -71,7 +69,6 @@ router.put("/update-user", async (req, res) => {
             user: existing,
         });
     } catch (error) {
-        console.error("Error updating user:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -85,7 +82,6 @@ router.get("/get-all-users", async (req, res) => {
             users,
         });
     } catch (error) {
-        console.error("Error fetching users:", error);
         res.status(500).json({ message: error.message });
     }
 });

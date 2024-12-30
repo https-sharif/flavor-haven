@@ -144,7 +144,7 @@ export function LoginPage() {
 
             navigate("/");
         } catch (error) {
-            console.error("Error during sign-in:", error);
+            (error as Error).message = "Failed to sign in with Google";
         } finally {
             setIsLoading(false);
         }
@@ -212,7 +212,7 @@ export function LoginPage() {
 
             navigate("/");
         } catch (error) {
-            console.error("Error during sign-in:", error);
+            (error as Error).message = "Failed to sign in with Facebook";
         }
         setIsLoading(false);
     };
@@ -280,8 +280,8 @@ export function LoginPage() {
             navigate("/");
         } catch (error) {
             if (error instanceof FirebaseError) {
-                console.error("Firebase Error Code:", error.code);
-                console.error("Firebase Error Message:", error.message);
+                
+                
                 switch (error.code) {
                     case "auth/invalid-credential":
                         setError(
@@ -317,7 +317,7 @@ export function LoginPage() {
                 <Link to="/" draggable="false">
                     <div className="flex justify-center mb-8">
                         <img
-                            src="/assets/logo.svg"
+                            src="/public/assets/logo.svg"
                             alt="Flavor Haven Logo"
                             className="w-[180px] object-contain rounded-lg"
                             draggable="false"

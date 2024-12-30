@@ -25,7 +25,6 @@ router.post("/create-order", async (req, res) => {
             order: newOrder,
         });
     } catch (error) {
-        console.error("Error creating order:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -51,7 +50,6 @@ router.put("/update-order/:orderId", async (req, res) => {
             order,
         });
     } catch (error) {
-        console.error("Error updating order:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -72,7 +70,6 @@ router.delete("/delete-order/:orderId", async (req, res) => {
             order,
         });
     } catch (error) {
-        console.error("Error deleting order:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -93,7 +90,6 @@ router.get("/fetch-user-orders/:userId", async (req, res) => {
             orders,
         });
     } catch (error) {
-        console.error("Error fetching orders:", error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -112,7 +108,6 @@ router.get("/fetch-all-orders", async (req, res) => {
             orders,
         });
     } catch (error) {
-        console.error("Error fetching orders:", error);
         res.status(500).json({ message: error.message });
     }
 });

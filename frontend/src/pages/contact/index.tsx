@@ -28,7 +28,8 @@ export function ContactPage() {
 
             displayMessage("Your message has been sent successfully!");
         } catch (error) {
-            console.error("There was a problem with the form submission:", error);
+            (error as Error).message = "Failed to send message";
+            displayMessage("Failed to send message");
         }
     };
 

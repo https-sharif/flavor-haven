@@ -54,7 +54,7 @@ export function ReservationsPage() {
       }
 
     } catch (error) {
-      console.error('Failed to create reservation:', error);
+      (error as Error).message = 'Failed to create reservation';
       displayMessage('Failed to create reservation. Please try again.');
     } finally {
       setIsLoading(false);

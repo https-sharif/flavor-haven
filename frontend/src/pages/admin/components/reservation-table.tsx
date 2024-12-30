@@ -43,7 +43,7 @@ export function ReservationTable({
                 displayMessage("Reservation deleted successfully");
                 setReservations(reservations.filter((reservation) => reservation.id !== reservationId));
             } catch (error) {
-                console.error("Error deleting reservation:", error);
+                (error as Error).message = "Failed to delete reservations";
                 displayMessage("Failed to delete reservation.");
             }
         }

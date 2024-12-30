@@ -44,8 +44,9 @@ export function AdminDashboard() {
                 data.orders.sort((a: { createdAt: Date; }, b: { createdAt: Date; }) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
                 setOrders(data.orders);
-            } catch (error) {
-                console.error("Error fetching orders:", error);
+            }
+            catch (error) {
+                (error as Error).message = "Failed to fetch orders";
             }
         }
 
@@ -67,7 +68,7 @@ export function AdminDashboard() {
 
               setReservations(data.reservations);
             } catch (error) {
-              console.error("Error fetching reservations:", error);
+                (error as Error).message = "Failed to fetch reservations";
             }
           }
 
@@ -87,7 +88,7 @@ export function AdminDashboard() {
                 const data = await response.json();
                 setUserCount(data.users.length);
             } catch (error) {
-                console.error("Error fetching user count:", error);
+                (error as Error).message = "Failed to fetch user count";
             }
         }
 

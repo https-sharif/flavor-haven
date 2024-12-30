@@ -24,7 +24,6 @@ router.post('/create-reservation', async (req, res) => {
             reservation: newReservation,
         });
     } catch (error) {
-        console.error('Error creating reservation:', error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -38,7 +37,6 @@ router.get('/fetch-all-reservation', async (req, res) => {
             reservations,
         });
     } catch (error) {
-        console.error('Error fetching reservations:', error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -58,7 +56,6 @@ router.delete('/delete-reservation/:reservationId', async (req, res) => {
             reservation: result,
         });
     } catch (error) {
-        console.error('Error deleting reservation:', error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -83,7 +80,6 @@ router.put('/update-reservation/:reservationId', async (req, res) => {
             reservation: reservation,
         });
     } catch (error) {
-        console.error('Error updating reservation:', error);
         res.status(500).json({ message: error.message });
     }
 });

@@ -37,7 +37,7 @@ export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
                 displayMessage("Order deleted successfully");
                 setOrderList(orderList.filter((order) => order.id !== orderId));
             } catch (error) {
-                console.error("Error deleting order:", error);
+                (error as Error).message = "Failed to delete orders";
                 displayMessage("Failed to delete order.");
             }
         }

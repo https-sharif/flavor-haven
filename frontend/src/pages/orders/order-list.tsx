@@ -39,7 +39,7 @@ export function OrderList() {
           sortOrder(data.orders);
           setOrders(data.orders);
         } catch (error) {
-          console.error("Error fetching orders:", error);
+          (error as Error).message = "Failed to fetch orders";
         } finally {
           setLoading(false);
         }

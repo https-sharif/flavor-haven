@@ -74,7 +74,7 @@ export function CartPage() {
             setStep("success");
             displayMessage("Payment successful, your order is on the way!");
         } catch (error) {
-            console.error("Payment failed:", error);
+            (error as Error).message = "Payment failed";
         }
     };
 

@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
         contact: newContact
         });
     } catch (error) {
-        console.error('Error creating contact:', error);
         res.status(500).json({ message: error.message });
     }
 });

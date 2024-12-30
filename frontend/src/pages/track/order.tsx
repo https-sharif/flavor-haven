@@ -39,7 +39,6 @@ export function TrackOrderPage() {
             );
 
             if (!response.ok) {
-                console.error("Failed to fetch order status");
                 displayMessage(
                     "Order not found. Please check the order ID and try again."
                 );
@@ -92,7 +91,6 @@ export function TrackOrderPage() {
                 );
     
                 if (!response.ok) {
-                    console.error("Failed to fetch order status");
                     displayMessage(
                         "Order not found. Please check the order ID and try again."
                     );

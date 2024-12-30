@@ -260,17 +260,6 @@ const menuItems: MenuItem[] = [
     eta: 30,
   },
   {
-    id: '24',
-    name: 'Spinach and Artichoke Dip',
-    description: 'Creamy spinach and artichoke dip with tortilla chips and veggies',
-    price: 1500,
-    category: 'starters',
-    subcategory: 'vegetarian',
-    image: '/assets/menu/Spinach_and_Artichoke_Dip.jpg',
-    available: true,
-    eta: 75,
-  },
-  {
     id: '25',
     name: 'Stuffed Mushrooms',
     description: 'Mushrooms stuffed with garlic, cream cheese, and fresh herbs',
@@ -594,17 +583,6 @@ const menuItems: MenuItem[] = [
     image: '/assets/menu/Vegan_Shepherds_Pie.jpg',
     available: true,
     eta: 65
-  },
-  {
-    id: '54',
-    name: 'Chickpea and Spinach Curry',
-    description: 'Served with basmati rice and naan',
-    price: 2200,
-    category: 'mains',
-    subcategory: 'vegetarian & vegan',
-    image: '/assets/menu/Chickpea_and_Spinach_Curry.jpg',
-    available: true,
-    eta: 80
   },
 
   // Desserts (Cakes & Pastries)
