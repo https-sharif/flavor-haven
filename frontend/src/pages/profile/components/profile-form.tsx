@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Button } from "../../../components/ui/button";
 import { Input } from "../../../components/ui/input";
 import type { User } from "../../../types";
+import Loading from "../../../animations/loading";
 
 const profileSchema = z.object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -64,8 +65,8 @@ export function ProfileForm({ user, onSubmit }: ProfileFormProps) {
                 )}
             </div>
 
-            <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Saving..." : "Save Changes"}
+            <Button type="submit" disabled={isSubmitting} className="min-w-10">
+                {isSubmitting ? <Loading /> : "Save Changes"}
             </Button>
         </form>
     );
