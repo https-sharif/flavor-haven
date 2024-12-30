@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['https://flavor-haven.vercel.app/','https://flavor-haven-git-master-sharif-islams-projects.vercel.app/'],
 }));
 app.use('/api/user', userRoutes);
 app.use('/api/order', orderRoutes);
