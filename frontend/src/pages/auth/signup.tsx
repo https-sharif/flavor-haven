@@ -275,7 +275,7 @@ export function SignupPage() {
                 <Link to="/" draggable="false">
                     <div className="flex justify-center mb-8">
                         <img
-                            src="/src/assets/logo.svg"
+                            src="/public/assets/logo.svg"
                             alt="Flavor Haven Logo"
                             className="w-[180px] object-contain rounded-lg select-none"
                             draggable="false"

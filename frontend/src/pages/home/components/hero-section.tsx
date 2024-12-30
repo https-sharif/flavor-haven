@@ -19,7 +19,7 @@ export function HeroSection() {
         className="relative text-center text-white px-4"
       >
         <motion.img
-          src="/src/assets/logo.svg"
+          src="/public/assets/logo.svg"
           alt="Flavor Haven Logo"
           className="w-[500px] mx-auto mb-8"
           style={{ y: -20 }}

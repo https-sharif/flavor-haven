@@ -72,9 +72,9 @@ export function PolicyPage() {
             </section>
           </div>
 
-          <p className="mt-8 text-sm text-gray-500">
-          Last updated: {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-          </p>
+            <p className="mt-8 text-sm text-gray-500">
+            Last updated: {new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+            </p>
         </motion.div>
       </div>
     </div>

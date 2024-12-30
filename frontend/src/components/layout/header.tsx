@@ -20,7 +20,7 @@ export function Header() {
                     draggable="false"
                 >
                     <img
-                        src="/src/assets/logo.svg"
+                        src="/public/assets/logo.svg"
                         alt="Flavor Haven Logo"
                         className="w-[120px]"
                         draggable="false"
