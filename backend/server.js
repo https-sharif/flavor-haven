@@ -19,13 +19,6 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI, {
   dbName: process.env.DB_NAME,
 });
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
-});
-
-mongoose.connection.on('error', (err) => {
-    console.log(`MongoDB connection error: ${err}`);
-});
 
 // Routes
 app.get('/', (req, res) => {
@@ -41,8 +34,4 @@ app.use('/api/track', trackRoutes);
 app.use('/api/reservation', reservationRoutes);
 app.use('/api/contact', contactRoutes);
 
-// Start Server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT);
