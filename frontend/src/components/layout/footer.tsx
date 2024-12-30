@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export function Footer() {
     const [subscribe, setSubscribe] = useState(false);
@@ -49,46 +50,47 @@ export function Footer() {
                         <h3 className="text-xl font-bold mb-4 text-primary">
                             Quick Links
                         </h3>
-                            <li>
-                                <a
-                                    href="/menu"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    Menu
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="/reservations"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    Reservations
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="/orders"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    Your Orders
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="/track-order"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    Track Order
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="/track-reservation"
-                                    className="hover:text-primary transition-colors"
-                                >
-                                    Track Reservation
-                                </a>
-                            </li>
+
+                        <li>
+                            <Link
+                                to="/menu"
+                                className="hover:text-primary transition-colors"
+                            >
+                                Menu
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/reservations"
+                                className="hover:text-primary transition-colors"
+                            >
+                                Reservations
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/orders"
+                                className="hover:text-primary transition-colors"
+                            >
+                                Your Orders
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/track-order"
+                                className="hover:text-primary transition-colors"
+                            >
+                                Track Order
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/track-reservation"
+                                className="hover:text-primary transition-colors"
+                            >
+                                Track Reservation
+                            </Link>
+                        </li>
                     </div>
 
                     <div className="m-2">
@@ -96,36 +98,36 @@ export function Footer() {
                             Legal & Support
                         </h3>
                         <li>
-                            <a
-                                href="/terms"
+                            <Link
+                                to="/terms"
                                 className="hover:text-primary transition-colors"
                             >
                                 Term Of Service
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="/policy"
+                            <Link
+                                to="/policy"
                                 className="hover:text-primary transition-colors"
                             >
                                 Privacy Policy
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="/about"
+                            <Link
+                                to="/about"
                                 className="hover:text-primary transition-colors"
                             >
                                 About Us
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="/contact"
+                            <Link
+                                to="/contact"
                                 className="hover:text-primary transition-colors"
                             >
                                 Contact Us
-                            </a>
+                            </Link>
                         </li>
                     </div>
 
@@ -141,29 +143,39 @@ export function Footer() {
                             onSubmit={(e) => {
                                 e.preventDefault();
                                 const form = e.target as HTMLFormElement;
-                                const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+                                const email = (
+                                    form.elements.namedItem(
+                                        "email"
+                                    ) as HTMLInputElement
+                                ).value;
                                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                                 if (!emailRegex.test(email)) {
                                     setSubscribe(false);
-                                    const existingError = document.getElementById("email-error");
+                                    const existingError =
+                                        document.getElementById("email-error");
                                     if (existingError) {
                                         existingError.remove();
                                     }
-                                    const errorMessage = document.createElement("p");
-                                    errorMessage.textContent = "Please enter a valid email address.";
-                                    errorMessage.className = "text-red-500 mt-2 absolute";
+                                    const errorMessage =
+                                        document.createElement("p");
+                                    errorMessage.textContent =
+                                        "Please enter a valid email address.";
+                                    errorMessage.className =
+                                        "text-red-500 mt-2 absolute";
                                     errorMessage.id = "email-error";
                                     const form = e.target as HTMLFormElement;
                                     form.appendChild(errorMessage);
 
                                     errorMessage.style.opacity = "0";
-                                    errorMessage.style.transition = "opacity 0.5s ease-out";
+                                    errorMessage.style.transition =
+                                        "opacity 0.5s ease-out";
                                     requestAnimationFrame(() => {
                                         errorMessage.style.opacity = "1";
                                     });
                                     return;
                                 }
-                                const existingError = document.getElementById("email-error");
+                                const existingError =
+                                    document.getElementById("email-error");
                                 if (existingError) {
                                     existingError.remove();
                                 }
@@ -183,12 +195,12 @@ export function Footer() {
                         </form>
                         {subscribe && (
                             <motion.div
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              className="absolute text-center text-white mt-3"
-                              transition={{ delay: 1 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="absolute text-center text-white mt-3"
+                                transition={{ delay: 1 }}
                             >
-                              Subscribed successfully!
+                                Subscribed successfully!
                             </motion.div>
                         )}
                     </div>
