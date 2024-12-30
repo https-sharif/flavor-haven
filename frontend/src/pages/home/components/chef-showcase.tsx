@@ -4,15 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
 const chefs = [
   {
     id: 1,
-    name: 'Marcus Laurent',
+    name: 'Jacques Marin',
     role: 'Executive Chef',
     image: 'https://images.unsplash.com/photo-1583394293214-28ded15ee548?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     description: 'Michelin-starred chef with 20 years of culinary excellence',
   },
   {
     id: 2,
-    name: 'Jacques Marin',
-    role: 'Pastry Chef',
+    name: 'Marcus Laurent Jr.',
+    role: 'Head Pastry Chef',
     image: 'https://images.unsplash.com/photo-1607631568010-a87245c0daf8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     description: 'Award-winning pastry artist specializing in French desserts',
   },

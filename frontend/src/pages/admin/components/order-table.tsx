@@ -25,7 +25,7 @@ export function OrderTable({ orders, onStatusChange }: OrderTableProps) {
         if (confirmed) {
             try {
                 const response = await fetch(
-                    `http://localhost:3000/api/order/delete-order/${orderId}`,
+                    `${import.meta.env.VITE_BACKEND_URL}/api/order/delete-order/${orderId}`,
                     {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json" },

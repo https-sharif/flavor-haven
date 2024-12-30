@@ -56,7 +56,7 @@ export function LocationSection() {
                                         Contact
                                     </h3>
                                     <p className="text-gray-400">
-                                        +88 016 2181 0336
+                                        +88 018 2627 1947
                                     </p>
                                 </div>
                             </div>
@@ -74,7 +74,12 @@ export function LocationSection() {
                             </div>
                         </div>
 
-                        <a href="https://maps.app.goo.gl/R8VEQfVuxShXttT38" target="_blank" rel="noreferrer" className="inline-block">
+                        <a
+                            href="https://maps.app.goo.gl/R8VEQfVuxShXttT38"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-block"
+                        >
                             <Button size="lg" variant="primary">
                                 Get Directions
                             </Button>
@@ -96,7 +101,7 @@ export function LocationSection() {
                             allowFullScreen
                             loading="lazy"
                             referrerPolicy="no-referrer-when-downgrade"
-                            title="Restaurant Location"
+                            title="Flavor Haven Location"
                         />
                     </motion.div>
                 </div>

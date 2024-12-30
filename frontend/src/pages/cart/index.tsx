@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { motion } from "framer-motion";
 import { useCartStore } from "../../store/cart-store";
 import { CartItems } from "./components/cart-items";
@@ -9,7 +9,7 @@ import { EmptyCart } from "./components/empty-cart";
 import { useAuthStore } from "../../store/auth-store";
 import LoginRequiredPage from "../errors/LoginRequiredPage";
 import { displayMessage } from "../../lib/displayMessage";
-import menuItems from "../menu/menuList";
+import menuItems from "../menu/components/menuList";
 import { OrderSuccess } from "./components/order-succes";
 
 const DELIVERY_FEE = 120;
@@ -21,6 +21,7 @@ export function CartPage() {
     const { items, updateQuantity, removeItem, clearCart } = useCartStore();
     const { user } = useAuthStore();
     const [orderId, setOrderId] = useState("");
+    const [deliveryTime, setDeliveryTime] = useState(0);
 
     const handleDeliverySubmit = () => {
         setStep("payment");
@@ -39,12 +40,14 @@ export function CartPage() {
         return deliveryTime;
     };
 
-    const deliveryTime = calculateEstimatedDeliveryTime();
-
     const handlePaymentSubmit = async () => {
         try {
+
+            const dt = calculateEstimatedDeliveryTime();
+            setDeliveryTime(dt);
+
             const response = await fetch(
-                "http://localhost:3000/api/order/create-order",
+                `${import.meta.env.VITE_BACKEND_URL}/api/order/create-order`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -55,7 +58,7 @@ export function CartPage() {
                         total: items.reduce((total, item) => total + item.price * item.quantity, 0),
                         status: "pending",
                         createdAt: new Date(),
-                        estimatedDeliveryTime: deliveryTime,
+                        estimatedDeliveryTime: dt,
                     }),
                 }
             );

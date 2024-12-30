@@ -65,14 +65,12 @@ export function ReservationForm({ onSubmit, isLoading }: ReservationFormProps) {
             <div className="relative">
             <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <Input
-              type="text"
+              type="date"
               {...register('date')}
               placeholder="dd-mm-yyyy"
               className="pl-10"
-              onFocus={(e) => (e.target.type = 'date')}
-              onBlur={(e) => (e.target.type = 'text')}
-              min={format(new Date(), 'dd-MM-yyyy')}
-              max={format(addDays(new Date(), 30), 'dd-MM-yyyy')}
+              min={format(new Date(), 'yyyy-MM-dd')}
+              max={format(addDays(new Date(), 30), 'yyyy-MM-dd')}
             />
             </div>
           {errors.date && (

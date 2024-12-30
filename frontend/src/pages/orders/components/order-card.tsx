@@ -1,7 +1,7 @@
 import { Clock } from "lucide-react";
-import { Order } from "../../types/index";
+import { Order } from "../../../types/index";
 import { motion } from "framer-motion";
-import { displayMessage } from "../../lib/displayMessage";
+import { displayMessage } from "../../../lib/displayMessage";
 
 interface OrderCardProps {
     order: Order;

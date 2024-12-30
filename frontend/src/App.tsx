@@ -15,6 +15,8 @@ import { TrackReservationPage } from "./pages/track/reservation";
 import { OrderList } from "./pages/orders/order-list";
 import { AdminDashboard } from "./pages/admin";
 import { CartPage } from "./pages/cart";
+import { AboutPage } from "./pages/about";
+import { ContactPage } from "./pages/contact";
 
 function App() {
     return (
@@ -36,6 +38,8 @@ function App() {
                         <Route path="/orders" element={<OrderList />} />
                         <Route path="/terms" element={<TermsPage />} />
                         <Route path="/policy" element={<PolicyPage />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
                         <Route path="/track-order/:orderId?" element={<TrackOrderPage />} />
                         <Route path="/track-reservation/:reservationId?" element={<TrackReservationPage />} />
                         <Route path="/admin" element={<AdminDashboard />} />

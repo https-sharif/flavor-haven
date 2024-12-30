@@ -31,7 +31,7 @@ export function TrackOrderPage() {
             }
 
             const response = await fetch(
-                `http://localhost:3000/api/track/order/${orderId}`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/track/order/${orderId}`,
                 {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
@@ -84,7 +84,7 @@ export function TrackOrderPage() {
             if (paramOrderId) {
                 setOrderId(paramOrderId);
                 const response = await fetch(
-                    `http://localhost:3000/api/track/order/${paramOrderId}`,
+                    `${import.meta.env.VITE_BACKEND_URL}/api/track/order/${paramOrderId}`,
                     {
                         method: "GET",
                         headers: { "Content-Type": "application/json" },

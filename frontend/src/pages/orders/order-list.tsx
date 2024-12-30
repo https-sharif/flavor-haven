@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Order } from "../../types/index";
-import { OrderCard } from "./order-card";
+import { OrderCard } from "./components/order-card";
 import { useAuthStore } from "../../store/auth-store";
 import LoginRequiredPage from "../errors/LoginRequiredPage";
 import { EmptyOrders } from "./components/empty-orders";
@@ -26,7 +26,7 @@ export function OrderList() {
         try {
           setLoading(true);
           const response = await fetch(
-            `http://localhost:3000/api/order/fetch-user-orders/${user.userId}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/order/fetch-user-orders/${user.userId}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },

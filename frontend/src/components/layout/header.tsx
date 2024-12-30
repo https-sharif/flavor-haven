@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, User, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { useAuthStore } from "../../store/auth-store";
 import { useCartStore } from "../../store/cart-store";
+import { MobileNav } from "./mobile-navbar";
 
 export function Header() {
     const { isAuthenticated, user } = useAuthStore();
     const totalItems = useCartStore((state) => state.totalItems);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm font-poppins">
+        <header className="sticky top-0 left-0 right-0 z-50 bg-black  font-poppins">
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">
                 <Link
                     to="/"
@@ -38,22 +41,41 @@ export function Header() {
                         Reservations
                     </Link>
                     <Link
+                        to="/about"
+                        className="text-white hover:text-[#D4AF37] transition-colors"
+                    >
+                        About
+                    </Link>
+                    <Link
+                        to="/contact"
+                        className="text-white hover:text-[#D4AF37] transition-colors"
+                    >
+                        Contact
+                    </Link>
+                    <Link
                         to="/orders"
                         className="text-white hover:text-[#D4AF37] transition-colors"
                     >
                         Orders
                     </Link>
+
                 </nav>
 
                 <div className="flex items-center gap-4">
                     {isAuthenticated ? (
                         <>
-                            <Link to="/cart">
-                            <div className="relative">
-                                <ShoppingCart className="w-6 h-6 text-[#D4AF37]" />
-                                <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-black text-xs font-semibold px-1 rounded-full">{totalItems} </span>
-                            </div>
-                                
+                            <Link
+                                to="/cart"
+                                className="text-[#D4AF37] hover:text-[#B8960C] transition-colors"
+                            >
+                                <div className="relative">
+                                    <ShoppingCart className="w-6 h-6 text-[#D4AF37]" />
+                                    {totalItems > 0 && (
+                                        <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-black text-xs font-semibold px-1 rounded-full">
+                                            {totalItems}
+                                        </span>
+                                    )}
+                                </div>
                             </Link>
                             <Link
                                 to="/profile"
@@ -72,20 +94,27 @@ export function Header() {
                             </Link>
                         </>
                     ) : (
-                        <>
+                        <div className="hidden md:flex items-center gap-4">
                             <Button variant="outline" size="sm" to="/login">
                                 Login
                             </Button>
                             <Button variant="primary" size="sm" to="/signup">
                                 Sign Up
                             </Button>
-                        </>
+                        </div>
                     )}
-                    <button className="md:hidden">
-                        <Menu className="w-6 h-6 text-[#D4AF37]" />
+                    <button
+                        onClick={() => setIsMobileMenuOpen(true)}
+                        className="md:hidden text-[#D4AF37] hover:text-[#B8960C] transition-colors"
+                    >
+                        <Menu className="w-6 h-6" />
                     </button>
                 </div>
             </div>
+            <MobileNav
+                isOpen={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(false)}
+            />
         </header>
     );
 }

@@ -47,10 +47,9 @@ export function ReservationSuccess({
                 </div>
             </div>
 
-            <h2 className="text-2xl font-bold mb-4">Reservation Confirmed!</h2>
+            <h2 className="text-2xl font-bold mb-4">Reservation Request Received!</h2>
             <p className="text-gray-600 mb-6">
-                Thank you for choosing Flavor Haven. We look forward to serving
-                you.
+                Your reservation is pending confirmation. You will receive an email once confirmed.
             </p>
 
             <div className="bg-gray-50 rounded-lg p-6 mb-6 space-y-4">

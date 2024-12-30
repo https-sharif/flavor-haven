@@ -26,7 +26,7 @@ export function AdminDashboard() {
             if (!user) return;
             try {
                 const response = await fetch(
-                    `http://localhost:3000/api/order/fetch-all-orders`,
+                    `${import.meta.env.VITE_BACKEND_URL}/api/order/fetch-all-orders`,
                     {
                         method: "GET",
                         headers: { "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ export function AdminDashboard() {
         async function fetchReservations() {
             try {
               const response = await fetch(
-                `http://localhost:3000/api/reservation/fetch-all-reservation`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/reservation/fetch-all-reservation`,
                 {
                   method: "GET",
                   headers: { "Content-Type": "application/json" },
@@ -74,7 +74,7 @@ export function AdminDashboard() {
         async function fetchUserCount() {
             try {
                 const response = await fetch(
-                    `http://localhost:3000/api/user/get-all-users`,
+                    `${import.meta.env.VITE_BACKEND_URL}/api/user/get-all-users`,
                     {
                         method: "GET",
                         headers: { "Content-Type": "application/json" },
@@ -107,7 +107,7 @@ export function AdminDashboard() {
         );
 
         const response = await fetch(
-            `http://localhost:3000/api/order/update-order/${orderId}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/order/update-order/${orderId}`,
             {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
@@ -137,7 +137,7 @@ export function AdminDashboard() {
         );
 
         const response = await fetch(
-            `http://localhost:3000/api/reservation/update-reservation/${reservationId}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/reservation/update-reservation/${reservationId}`,
             {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },

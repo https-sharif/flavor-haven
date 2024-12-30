@@ -40,9 +40,10 @@ setPersistence(auth, browserLocalPersistence);
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
+        console.log(import.meta.env.VITE_BACKEND_URL);
 
         const userExists = await fetch(
-            `http://localhost:3000/api/user/get-user/${user.uid}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/user/get-user/${user.uid}`,
             {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -95,7 +96,7 @@ export function LoginPage() {
             const user = result.user;
 
             const userExists = await fetch(
-                `http://localhost:3000/api/user/get-user/${user.uid}`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/user/get-user/${user.uid}`,
                 {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
@@ -118,7 +119,7 @@ export function LoginPage() {
             }
 
             const response = await fetch(
-                "http://localhost:3000/api/user/create-user",
+                `${import.meta.env.VITE_BACKEND_URL}/api/user/create-user`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -163,7 +164,7 @@ export function LoginPage() {
             const additional = await getAdditionalUserInfo(result);
 
             const userExists = await fetch(
-                `http://localhost:3000/api/user/get-user/${user.uid}`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/user/get-user/${user.uid}`,
                 {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
@@ -186,7 +187,7 @@ export function LoginPage() {
             }
 
             const response = await fetch(
-                "http://localhost:3000/api/user/create-user",
+                `${import.meta.env.VITE_BACKEND_URL}/api/user/create-user`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -230,7 +231,7 @@ export function LoginPage() {
             const user = userCredential.user;
 
             const userExists = await fetch(
-                `http://localhost:3000/api/user/get-user/${user.uid}`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/user/get-user/${user.uid}`,
                 {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
@@ -253,7 +254,7 @@ export function LoginPage() {
             }
 
             const response = await fetch(
-                "http://localhost:3000/api/user/create-user",
+                `${import.meta.env.VITE_BACKEND_URL}/api/user/create-user`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

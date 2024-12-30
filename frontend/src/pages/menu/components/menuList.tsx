@@ -1,4 +1,4 @@
-import { MenuItem } from "../../types";
+import { MenuItem } from "../../../types";
 
 const menuItems: MenuItem[] = [
       // Starters (Meat)

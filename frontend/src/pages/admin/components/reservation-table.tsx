@@ -31,7 +31,7 @@ export function ReservationTable({
         if (confirmed) {
             try {
                 const response = await fetch(
-                    `http://localhost:3000/api/reservation/delete-reservation/${reservationId}`,
+                    `${import.meta.env.VITE_BACKEND_URL}/api/reservation/delete-reservation/${reservationId}`,
                     {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json" },

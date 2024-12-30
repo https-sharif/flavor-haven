@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
-import menuList from '../../menu/menuList';
+import menuList from '../../menu/components/menuList';
 
 const popularDishesID = [ '1', '6', '8', '5', '9'];
 

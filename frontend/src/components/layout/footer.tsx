@@ -25,7 +25,7 @@ export function Footer() {
                         <div className="space-y-4">
                             <div className="flex items-center gap-2">
                                 <Phone className="w-5 h-5 text-primary" />
-                                <span>+88 016 2181 0336</span>
+                                <span>+88 018 2627 1947</span>
                             </div>
                             <div className="flex items-center gap-2">
                                 <Mail className="w-5 h-5 text-primary" />
@@ -45,12 +45,10 @@ export function Footer() {
                         </div>
                     </div>
 
-                    {/* Quick Links */}
-                    <div>
+                    <div className="m-2">
                         <h3 className="text-xl font-bold mb-4 text-primary">
                             Quick Links
                         </h3>
-                        <ul className="space-y-2">
                             <li>
                                 <a
                                     href="/menu"
@@ -69,6 +67,14 @@ export function Footer() {
                             </li>
                             <li>
                                 <a
+                                    href="/orders"
+                                    className="hover:text-primary transition-colors"
+                                >
+                                    Your Orders
+                                </a>
+                            </li>
+                            <li>
+                                <a
                                     href="/track-order"
                                     className="hover:text-primary transition-colors"
                                 >
@@ -83,13 +89,11 @@ export function Footer() {
                                     Track Reservation
                                 </a>
                             </li>
-                        </ul>
                     </div>
 
-                    {/* Opening Hours */}
-                    <div>
+                    <div className="m-2">
                         <h3 className="text-xl font-bold mb-4 text-primary">
-                            Legal
+                            Legal & Support
                         </h3>
                         <li>
                             <a
@@ -107,9 +111,24 @@ export function Footer() {
                                 Privacy Policy
                             </a>
                         </li>
+                        <li>
+                            <a
+                                href="/about"
+                                className="hover:text-primary transition-colors"
+                            >
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="/contact"
+                                className="hover:text-primary transition-colors"
+                            >
+                                Contact Us
+                            </a>
+                        </li>
                     </div>
 
-                    {/* Newsletter */}
                     <div>
                         <h3 className="text-xl font-bold mb-4 text-primary">
                             Newsletter
@@ -121,7 +140,33 @@ export function Footer() {
                             className="space-y-4"
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                
+                                const form = e.target as HTMLFormElement;
+                                const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailRegex.test(email)) {
+                                    setSubscribe(false);
+                                    const existingError = document.getElementById("email-error");
+                                    if (existingError) {
+                                        existingError.remove();
+                                    }
+                                    const errorMessage = document.createElement("p");
+                                    errorMessage.textContent = "Please enter a valid email address.";
+                                    errorMessage.className = "text-red-500 mt-2 absolute";
+                                    errorMessage.id = "email-error";
+                                    const form = e.target as HTMLFormElement;
+                                    form.appendChild(errorMessage);
+
+                                    errorMessage.style.opacity = "0";
+                                    errorMessage.style.transition = "opacity 0.5s ease-out";
+                                    requestAnimationFrame(() => {
+                                        errorMessage.style.opacity = "1";
+                                    });
+                                    return;
+                                }
+                                const existingError = document.getElementById("email-error");
+                                if (existingError) {
+                                    existingError.remove();
+                                }
                                 setSubscribe(true);
                             }}
                         >

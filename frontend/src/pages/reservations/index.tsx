@@ -25,7 +25,7 @@ export function ReservationsPage() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      const response = await fetch('http://localhost:3000/api/reservation/create-reservation', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/reservation/create-reservation`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

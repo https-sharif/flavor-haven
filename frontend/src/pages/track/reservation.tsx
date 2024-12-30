@@ -31,7 +31,7 @@ export function TrackReservationPage() {
         }
 
         const response = await fetch(
-            `http://localhost:3000/api/track/reservation/${reservationId}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/track/reservation/${reservationId}`,
             {
                 method: "GET",
                 headers: {
@@ -54,7 +54,7 @@ export function TrackReservationPage() {
             if (paramOrderId) {
                 setReservationId(paramOrderId);
                 const response = await fetch(
-                    `http://localhost:3000/api/track/reservation/${paramOrderId}`,
+                    `${import.meta.env.VITE_BACKEND_URL}/api/track/reservation/${paramOrderId}`,
                     {
                         method: "GET",
                         headers: {

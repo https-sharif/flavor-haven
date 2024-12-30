@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle, Clock, Receipt } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 import { Link } from 'react-router-dom';
+import { displayMessage } from '../../../lib/displayMessage';
 
 interface OrderSuccessProps {
   orderId: string;
@@ -45,7 +46,15 @@ export function OrderSuccess({ orderId, estimatedTime }: OrderSuccessProps) {
           <Clock className="w-5 h-5" />
           <span className="font-medium">Estimated Time: {estimatedTime} minutes</span>
         </div>
-        <p className="text-sm text-gray-600">Order ID: {orderId}</p>
+        <p 
+          className="text-sm text-gray-600 cursor-pointer" 
+          onClick={() => {
+            navigator.clipboard.writeText(orderId)
+            displayMessage("Order ID copied to clipboard")
+          }}
+        >
+          Order ID: {orderId}
+        </p>
       </div>
 
       <div className="space-y-3 ">

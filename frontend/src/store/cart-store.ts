@@ -25,14 +25,18 @@ export const useCartStore = create<CartState>()(
                 ? { ...i, quantity: i.quantity + 1 }
                 : i
             ),
-            totalItems: state.items.reduce((total, item) => total + item.quantity, 0),
+            totalItems: state.items.map((i) =>
+              i.id === item.id
+                ? { ...i, quantity: i.quantity + 1 }
+                : i
+            ).reduce((total, item) => total + item.quantity, 0),
           };
         }
         return { items: [...state.items, { ...item, quantity: 1 }], totalItems: state.totalItems + 1 };
       }),
       updateQuantity: (id, quantity) => set((state) => ({
         items: quantity > 0 ? state.items.map((item) => item.id === id ? { ...item, quantity } : item) : state.items.filter((item) => item.id !== id),
-        totalItems: state.items.reduce((total, item) => total + item.quantity, 0) + quantity,
+        totalItems: state.items.map((item) => item.id === id ? { ...item, quantity } : item).reduce((total, item) => total + item.quantity, 0),
       })),
       removeItem: (id) => set((state) => ({
         items: state.items.filter((item) => item.id !== id),

@@ -47,7 +47,7 @@ export function ProfilePage() {
     }) => {
         try {
             
-            const response = await fetch('http://localhost:3000/api/user/update-user/', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/update-user/`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId: user.userId, ...data }),
@@ -91,6 +91,7 @@ export function ProfilePage() {
                             <Button
                                 variant="outline"
                                 onClick={() => navigate("/admin")}
+                                className="p-2"
                             >
                                 Admin Dashboard
                             </Button>

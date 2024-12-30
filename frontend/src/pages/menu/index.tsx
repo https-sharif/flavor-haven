@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { Input } from "../../components/ui/input";
-import menuItems  from "./menuList";
+import menuItems  from "./components/menuList";
 import { MenuCategory } from "./components/menu-category";
 import { MenuHero } from "./components/menu-hero";
 
