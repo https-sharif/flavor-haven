@@ -317,7 +317,7 @@ export function LoginPage() {
                 <Link to="/" draggable="false">
                     <div className="flex justify-center mb-8">
                         <img
-                            src="/public/assets/logo.svg"
+                            src="/assets/logo.svg"
                             alt="Flavor Haven Logo"
                             className="w-[180px] object-contain rounded-lg"
                             draggable="false"
