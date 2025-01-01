@@ -21,7 +21,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send('Welcome to the Flavor Haven API!');
 });
 
