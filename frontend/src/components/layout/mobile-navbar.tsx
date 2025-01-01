@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { X, LogOut } from "lucide-react";
+import { X, LogOut, User } from "lucide-react";
 import { Button } from "../ui/button";
 import { useAuthStore } from "../../store/auth-store";
 import { useNavigate } from "react-router-dom";
@@ -17,11 +17,11 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-            await signOut(auth);
-            logout();
-            navigate("/");
-            onClose();
-        };
+        await signOut(auth);
+        logout();
+        navigate("/");
+        onClose();
+    };
 
     return (
         <AnimatePresence>
@@ -58,12 +58,16 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                 className="text-white text-2xl font-bold h-auto flex items-center flex-col "
                                 draggable="false"
                             >
-                                <img
-                                    src={user?.photoURL}
-                                    alt={user?.name}
-                                    className="w-[80px] rounded-full mb-4 hover:scale-105 transition-transform"
-                                    draggable="false"
-                                />
+                                {user?.photoURL ? (
+                                    <img
+                                        src={user?.photoURL}
+                                        alt={user?.name}
+                                        className="w-[80px] rounded-full mb-4 hover:scale-105 transition-transform"
+                                        draggable="false"
+                                    />
+                                ) : (
+                                    <User className="w-10 h-10" />
+                                )}
                                 <h1 className="hover:text-primary transition-colors px-4 py-2">
                                     {user?.name}
                                 </h1>
@@ -77,13 +81,6 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                 onClick={onClose}
                             >
                                 Menu
-                            </Link>
-                            <Link
-                                to="/reservations"
-                                className="text-white hover:text-primary transition-colors px-4 py-2"
-                                onClick={onClose}
-                            >
-                                Reservations
                             </Link>
                             <Link
                                 to="/about"
@@ -100,11 +97,18 @@ export function MobileNav({ isOpen, onClose }: MobileNavProps) {
                                 Contact
                             </Link>
                             <Link
+                                to="/reservations"
+                                className="text-white hover:text-primary transition-colors px-4 py-2"
+                                onClick={onClose}
+                            >
+                                Reservations
+                            </Link>
+                            <Link
                                 to="/orders"
                                 className="text-white hover:text-primary transition-colors px-4 py-2"
                                 onClick={onClose}
                             >
-                                Your Orders
+                                Orders
                             </Link>
                         </nav>
 

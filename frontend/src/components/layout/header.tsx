@@ -39,12 +39,6 @@ export function Header() {
                         Menu
                     </Link>
                     <Link
-                        to="/reservations"
-                        className="text-white hover:text-[#D4AF37] transition-colors"
-                    >
-                        Reservations
-                    </Link>
-                    <Link
                         to="/about"
                         className="text-white hover:text-[#D4AF37] transition-colors"
                     >
@@ -55,6 +49,12 @@ export function Header() {
                         className="text-white hover:text-[#D4AF37] transition-colors"
                     >
                         Contact
+                    </Link>
+                    <Link
+                        to="/reservations"
+                        className="text-white hover:text-[#D4AF37] transition-colors"
+                    >
+                        Reservations
                     </Link>
                     <Link
                         to="/orders"
@@ -89,7 +89,7 @@ export function Header() {
                                     <img
                                         src={user.photoURL}
                                         alt={user?.name || "User"}
-                                        className="w-6 h-6 rounded-full"
+                                        className="w-6 h-6"
                                     />
                                 ) : (
                                     <User className="w-6 h-6 text-[#D4AF37]" />
