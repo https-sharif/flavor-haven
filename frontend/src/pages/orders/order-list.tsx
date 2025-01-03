@@ -59,7 +59,13 @@ export function OrderList() {
                 Your <span className="text-primary">Orders</span>
             </h2>
             {loading ? (
-                <p>Loading...</p>
+                <div className="flex justify-center min-h-full">
+                <div className="relative w-8 h-8 border-4 border-transparent border-r-primary rounded-full animate-spinCustom">
+                  <div className="absolute inset-[-4px] border-4 border-transparent border-r-primary rounded-full animate-spinCustomBefore"></div>
+                  <div className="absolute inset-[-8px] border-4 border-transparent border-r-primary rounded-full animate-spinCustomAfter"></div>
+                </div>
+              </div>
+              
             ) : orders.length === 0 ? (
                 <EmptyOrders />
             ) : (
