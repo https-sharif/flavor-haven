@@ -89,7 +89,7 @@ export function Header() {
                                     <img
                                         src={user.photoURL}
                                         alt={user?.name || "User"}
-                                        className="w-6 h-6"
+                                        className="w-6 h-6 rounded-full "
                                     />
                                 ) : (
                                     <User className="w-6 h-6 text-[#D4AF37]" />
