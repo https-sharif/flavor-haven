@@ -1,4 +1,9 @@
-# Flavor Haven
+<p align="center">
+   <img src="./screenshots/logo.svg" alt="Flavor Haven Logo" width="400">
+</p>
+
+<h1 align="center" style="font-size: 3.5em;">Flavor Haven</h1>
+
 
 ## Project Overview
 

@@ -1193,7 +1193,3 @@ const menuItems: MenuItem[] = [
 ];
 
 export default menuItems;
-
-
-
-
