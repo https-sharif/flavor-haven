@@ -291,3 +291,7 @@ This project is licensed under the **MIT License**. See the [`LICENSE`](/LICENSE
 - This project was developed as part of a university coursework assignment.  
 - Special thanks to the **Flavor Haven** team for their creative input and collaboration.  
 - Built with a passion for great food and user experiences.
+
+## Support
+
+If this repo helped you out, don’t be shy — drop a ⭐ or fork it. It keeps the vibes alive.
