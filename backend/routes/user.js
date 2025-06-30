@@ -52,7 +52,7 @@ router.put("/update-user", async (req, res) => {
     const { userId, name, address, phone } = req.body;
 
     try {
-        const existing = await User.findOne({ userId });
+        const existing = await User.findOne({ userId: { $eq: userId } });
 
         if (!existing) {
             return res.status(404).json({ message: "User not found" });
