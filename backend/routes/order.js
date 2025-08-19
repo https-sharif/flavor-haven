@@ -94,7 +94,7 @@ router.get("/fetch-user-orders/:userId", async (req, res) => {
     }
 });
 
-router.get("/fetch-all-orders", fetchAllOrdersLimiter, async (req, res) => {
+router.get("/fetch-all-orders", async (req, res) => {
     try {
         const orders = await Order.find();
 
